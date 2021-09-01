@@ -69,7 +69,6 @@ function reset_adm1() {
         onEachFeature: onEachFeature1
     }).addTo(Lmap);
 }
-reset_adm1();
 
 function reset_adm1s(layer) {
     console.log('reset_adm', layer);
@@ -94,13 +93,13 @@ function reset_adm1s(layer) {
 function zoom_based_layerchange(isZoom) {
     //console.log(map.getZoom());
     // $("#zoomlevel").html(Lmap.getZoom());
-    // var currentZoom = Lmap.getZoom();
-    //console.log(currentZoom);
-    // if (currentZoom <= 6) {
-    // $("#layername").html("Coors Field");
-    // reset_adm1();
-    // showInfoVietNam();
-    // }
+    var currentZoom = Lmap.getZoom();
+    if (currentZoom >= 11) {
+        console.log(currentZoom);
+        // $("#layername").html("Coors Field");
+        reset_adm1();
+        // showInfoVietNam();
+    }
     // if (clicked_layer == 4) {
     //     return;
     // }
@@ -196,45 +195,6 @@ function onEachFeature1(feature, layer) {
         clicked_province = province;
         // clicked_layer = 0;
         showInfoTinh(province);
-    });
-}
-
-function onEachFeature2(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
-    });
-
-    layer.on('click', function(e) {
-        clicked_province = e.target.feature.properties.name1;
-        clicked_district = e.target.feature.properties.name;
-        province = e.target.feature.properties.name1;
-        district = e.target.feature.properties.name;
-        // clicked_layer = 0;
-        showInfoHuyen(province, district);
-    });
-}
-
-function onEachFeature3(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
-    });
-    //layer._leaflet_id = feature.id;  
-    layer.on('click', function(e) {
-
-        commune = e.target.feature.properties.name;
-        province = e.target.feature.properties.name1;
-        district = e.target.feature.properties.name2;
-
-
-        clicked_province = province;
-        clicked_district = district;
-        clicked_commune = commune;
-        // clicked_layer = 0;
-        showInfoXa(province, district, commune);
     });
 }
 
