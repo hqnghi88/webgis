@@ -1,0 +1,144 @@
+html {
+    overscroll-behavior-y: contain;
+    overflow-y: hidden;
+    touch-action: none;
+}
+
+.node {
+    cursor: pointer;
+}
+
+.close-image {
+    cursor: pointer;
+    display: block;
+    float: left;
+    z-index: 3;
+    position: absolute;
+    /*newly added*/
+    left: 5px;
+    /*newly added*/
+    top: 5px;
+    /*newly added*/
+}
+
+.overlay {
+    background-color: #EEE;
+}
+
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+.node text {
+    color: #fff;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+.link {
+    fill: none;
+    stroke: #999;
+}
+
+.found {
+    fill: #ff4136;
+    stroke: #ff4136;
+}
+
+input[type=checkbox] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(2);
+    /* IE */
+    -moz-transform: scale(2);
+    /* FF */
+    -webkit-transform: scale(2);
+    /* Safari and Chrome */
+    -o-transform: scale(2);
+    /* Opera */
+    transform: scale(2);
+    padding: 10px;
+}
+
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 3px;
+}
+
+.node text {
+    font: 14px sans-serif;
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 4px;
+}
+
+.search {
+    float: left;
+    font: 24px sans-serif;
+    width: 30%;
+}
+
+ul.select2-results {
+    max-height: 320px;
+}
+
+.select2-container,
+.select2-drop,
+.select2-search,
+.select2-search input {
+    font: 24px sans-serif;
+}
+
+#block_container {
+    display: inline;
+}
+
+a.button3 {
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    color: #FFFFFF;
+    background-color: #4eb5f1;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+a.button3:hover {
+    background-color: #4095c6;
+}
+
+@media all and (max-width:30em) {
+    a.button3 {
+        display: block;
+        margin: 0.2em auto;
+    }
+}
+
+.templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+}
+
+.ghostCircle.show {
+    display: block;
+}
+
+.ghostCircle,
+.activeDrag .ghostCircle {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}

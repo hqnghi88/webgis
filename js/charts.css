@@ -1,0 +1,48 @@
+.tab-wrapper {
+    width: 100%;
+}
+
+.tab-wrapper ul {
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+}
+
+.tab-wrapper ul li {
+    float: left;
+    list-style: none;
+    padding: 10px 20px;
+    background: #acacac;
+    color: #000;
+    border-radius: 10px 10px 0px 0px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.tab-wrapper ul li.active {
+    background: #348ec9;
+}
+
+.tab-wrapper ul li.active a {
+    color: white;
+}
+
+.tab-wrapper ul li a {
+    color: #000;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.tab-content {
+    padding: 20px;
+}
+
+.tab-item {
+    display: none;
+    position: absolute;
+    top: 46px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: auto;
+}
