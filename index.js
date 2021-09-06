@@ -22,7 +22,7 @@ app.post('/auth', function(request, response) {
     var username = request.body.username;
     var password = request.body.password;
     if (username && password) {
-        if (username == "admin" && password == "admin") {
+        if (username == "root" && password == "root") {
             request.session.loggedin = true;
             request.session.username = username;
             response.redirect('/home');
@@ -38,7 +38,7 @@ app.post('/auth', function(request, response) {
 
 app.get('/home', function(request, response) {
     if (request.session.loggedin) {
-        response.sendFile(__dirname + '/1index.html');
+        response.sendFile(__dirname + '/index3.html');
     } else {
         //response.send('Please login to view this page!');
         response.redirect('/');

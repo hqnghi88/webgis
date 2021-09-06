@@ -20,6 +20,7 @@
 // console.log('clicked_commune', clicked_commune);
 
 var f0_layer;
+var cell_layer;
 // var adm1_layer;
 // var adm2_layer;
 // var adm3_layer;
@@ -36,7 +37,7 @@ var Lmap = L.map('map', { zoomControl: false }).setView([16.0376435, 107.5341797
 // }).addTo(Lmap);
 // doi vimap > googlemaps
 L.tileLayer('https://maps.vnpost.vn/api/tm/{z}/{x}/{y}@2x.png?apikey={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://vmap.vn">Vmap</a>, <a href="http://openstreetmap.org">OSM Contributors</a>',
+    attribution: 'Map data &copy; <a href="https://vmap.vn">Vmap</a>',
     maxZoom: 20,
     id: 'Vmap.streets',
     accessToken: '26f9804e1ff6d86f72a33ebd518f057e0aff542de23c724d'
@@ -45,6 +46,14 @@ L.tileLayer('https://maps.vnpost.vn/api/tm/{z}/{x}/{y}@2x.png?apikey={accessToke
 Lmap.on('zoomend', function(e) {
     $("#zoomlevel").html(Lmap.getZoom());
     zoom_based_layerchange(true);
+});
+var greenIcon = new L.Icon({
+    iconUrl: 'img/m.png',
+    shadowUrl: 'img/m.png',
+    iconSize: [16, 16],
+    iconAnchor: [8, 8],
+    popupAnchor: [1, -34],
+    shadowSize: [16, 16]
 });
 
 function clean_map() {
@@ -64,7 +73,14 @@ function reset_adm1() {
     clicked_province = "";
     clicked_district = "";
     clicked_commune = "";
+    // cell_layer = L.geoJson(my_cell, {
+    //     style: style,
+    //     onEachFeature: onEachFeature1
+    // }).addTo(Lmap);
     f0_layer = L.geoJson(f0_gis, {
+        pointToLayer: function(feature, latlng) {
+            return L.marker(latlng, { icon: greenIcon });
+        },
         style: style,
         onEachFeature: onEachFeature1
     }).addTo(Lmap);
@@ -95,7 +111,7 @@ function zoom_based_layerchange(isZoom) {
     // $("#zoomlevel").html(Lmap.getZoom());
     var currentZoom = Lmap.getZoom();
     if (currentZoom >= 11) {
-        console.log(currentZoom);
+        // console.log(currentZoom);
         // $("#layername").html("Coors Field");
         reset_adm1();
         // showInfoVietNam();
@@ -120,7 +136,7 @@ function zoom_based_layerchange(isZoom) {
 
 
 function getColor(d) {
-    return 1;
+    return "red";
 }
 
 function getScore(feature) {
@@ -141,7 +157,7 @@ function style(feature) {
     return {
         weight: 1,
         opacity: 1,
-        color: 'gray',
+        color: 'red',
         dashArray: '3',
         fillOpacity: 0.7,
         fillColor: getColor(getScore(feature))
@@ -167,6 +183,12 @@ function highlightFeature(e) {
 }
 
 function resetHighlight(e) {
+    if (f0_layer) {
+        f0_layer.resetStyle(e.target);
+    }
+    if (cell_layer) {
+        cell_layer.resetStyle(e.target);
+    }
     // if (adm1_layer) {
     //     adm1_layer.resetStyle(e.target);
     // }
@@ -194,31 +216,32 @@ function onEachFeature1(feature, layer) {
         province = e.target.feature.properties.name;
         clicked_province = province;
         // clicked_layer = 0;
-        showInfoTinh(province);
+        // showInfoTinh(province);
     });
 }
 
-Lmap.attributionControl.addAttribution('Data &copy; <a href="https://itrithuc.vn/">iTriThuc</a>');
 
-$(window).on('load', function() {
+// Lmap.attributionControl.addAttribution('Data &copy; <a href="https://itrithuc.vn/">iTriThuc</a>');
 
-    setInterval(function() {
-        $('.collapse')
-            .on('shown.bs.collapse', function() {
-                $(this)
-                    .parent()
-                    .find(".fa-angle-down")
-                    .removeClass("fa-angle-down")
-                    .addClass("fa-angle-up");
-            })
-            .on('hidden.bs.collapse', function() {
-                $(this)
+// $(window).on('load', function() {
 
-                .parent()
-                    .find(".fa-angle-up")
-                    .removeClass("fa-angle-up")
-                    .addClass("fa-angle-down");
-            });
-    }, 500);
+//     setInterval(function() {
+//         $('.collapse')
+//             .on('shown.bs.collapse', function() {
+//                 $(this)
+//                     .parent()
+//                     .find(".fa-angle-down")
+//                     .removeClass("fa-angle-down")
+//                     .addClass("fa-angle-up");
+//             })
+//             .on('hidden.bs.collapse', function() {
+//                 $(this)
 
-});
+//                 .parent()
+//                     .find(".fa-angle-up")
+//                     .removeClass("fa-angle-up")
+//                     .addClass("fa-angle-down");
+//             });
+//     }, 500);
+
+// });
